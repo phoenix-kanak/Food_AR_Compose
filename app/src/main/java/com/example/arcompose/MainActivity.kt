@@ -41,29 +41,20 @@ class MainActivity : ComponentActivity() {
         setContent {
             ARComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    Box(modifier = Modifier.fillMaxSize()){
+                        Menu(modifier = Modifier.align(Alignment.BottomCenter))
+                    }
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     ARComposeTheme {
-        Greeting("Android")
+
     }
 }
 
@@ -79,14 +70,25 @@ fun Menu(modifier: Modifier){
         Food("pizza",R.drawable.pizza),
         Food("ramen",R.drawable.ramen)
     )
+    fun updateIndex(offset:Int){
+        index=(index+itemList.size+offset)%itemList.size
+    }
     Row(modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround){
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = {
+            updateIndex(-1)
+        }) {
             Icon(painter = painterResource(id = R.drawable.baseline_arrow_back_ios_24), contentDescription ="Back Button" )
-            CircularImage(modifier = modifier, image = itemList[index].image)
-            Icon(painter = painterResource(id = R.drawable.baseline_arrow_forward_ios_24), contentDescription ="Forward Button" )
-
+        }
+        CircularImage(modifier = modifier, image = itemList[index].image)
+        IconButton(onClick = {
+            updateIndex(1)
+        }) {
+            Icon(
+                painter = painterResource(id = R.drawable.baseline_arrow_forward_ios_24),
+                contentDescription = "Forward Button"
+            )
         }
     }
 }
