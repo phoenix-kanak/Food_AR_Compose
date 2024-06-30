@@ -66,6 +66,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("io.github.sceneview:sceneview:2.2.1")
+    //implementation(libs.sceneview)
+    implementation (libs.arsceneview)
 
+//    implementation (libs.core)
+//    implementation (libs.sceneform)
 }
